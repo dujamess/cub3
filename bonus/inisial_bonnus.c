@@ -6,7 +6,7 @@
 /*   By: khmessah <khmessah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:56:30 by khmessah          #+#    #+#             */
-/*   Updated: 2024/10/12 14:16:34 by khmessah         ###   ########.fr       */
+/*   Updated: 2024/10/12 17:54:25 by khmessah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void    init_window(t_info *info)
 {
 	info->mlx = mlx_init();
 	info->mlx_win = mlx_new_window(info->mlx, WIDTH, HEIGHT, "duva");
-	init_start_images(info);
+	// init_start_images(info);get_next_line_bonnus.c
 	// start_animation(info);
 }
 

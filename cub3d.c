@@ -6,7 +6,7 @@
 /*   By: khmessah <khmessah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:46:02 by mmondad           #+#    #+#             */
-/*   Updated: 2024/10/12 14:24:36 by khmessah         ###   ########.fr       */
+/*   Updated: 2024/10/12 18:05:14 by khmessah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void    new_maps(t_info *info)
 }
 void	init_texture(t_info *info)
 {
-	info->texture[0].xpm_ptr = mlx_xpm_file_to_image(info->mlx, "texture/mur_1.xpm", &info->texture[0].w, &info->texture[0].h);
+	info->texture[0].xpm_ptr = mlx_xpm_file_to_image(info->mlx, "./bonus/texture/mur_1.xpm", &info->texture[0].w, &info->texture[0].h);
 	info->texture[0].image = mlx_get_data_addr(info->texture[0].xpm_ptr, &info->texture[0].bet_pxl, &info->texture[0].size_line, &info->texture[0].endn);
-	info->texture[1].xpm_ptr = mlx_xpm_file_to_image(info->mlx, "texture/mur_2.xpm", &info->texture[1].w, &info->texture[1].h);
+	info->texture[1].xpm_ptr = mlx_xpm_file_to_image(info->mlx, "./bonus/texture/mur_2.xpm", &info->texture[1].w, &info->texture[1].h);
 	info->texture[1].image = mlx_get_data_addr(info->texture[1].xpm_ptr, &info->texture[1].bet_pxl, &info->texture[1].size_line, &info->texture[1].endn);
-	info->texture[2].xpm_ptr = mlx_xpm_file_to_image(info->mlx, "texture/ps3.xpm", &info->texture[2].w, &info->texture[2].h);
+	info->texture[2].xpm_ptr = mlx_xpm_file_to_image(info->mlx, "./bonus/texture/ps3.xpm", &info->texture[2].w, &info->texture[2].h);
 	info->texture[2].image = mlx_get_data_addr(info->texture[2].xpm_ptr, &info->texture[2].bet_pxl, &info->texture[2].size_line, &info->texture[2].endn);
-	info->texture[3].xpm_ptr = mlx_xpm_file_to_image(info->mlx, "texture/prison_lux1.xpm", &info->texture[3].w, &info->texture[3].h);
+	info->texture[3].xpm_ptr = mlx_xpm_file_to_image(info->mlx, "./bonus/texture/prison_lux1.xpm", &info->texture[3].w, &info->texture[3].h);
 	info->texture[3].image = mlx_get_data_addr(info->texture[3].xpm_ptr, &info->texture[3].bet_pxl, &info->texture[3].size_line, &info->texture[3].endn);
 }
 

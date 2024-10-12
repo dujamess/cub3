@@ -6,7 +6,7 @@
 /*   By: khmessah <khmessah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:02:31 by khmessah          #+#    #+#             */
-/*   Updated: 2024/10/12 14:01:51 by khmessah         ###   ########.fr       */
+/*   Updated: 2024/10/12 18:01:55 by khmessah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void	draw_vector(t_info *info)
 			info->point_depart++;
 		}
 		z += 1;
-		count = count + RAD / (VIEW * 2);
+		count = count + RAD / (VIEW * 1.5);
 		info->door_flag[0] = 0;
 		info->door_flag[1] = 0;
 	}
