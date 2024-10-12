@@ -7,8 +7,9 @@ SRCS_C    = bonus/colors_bonnus.c bonus/cub3d_bonnus.c bonus/distance_bonnus.c b
 			bonus/parssing1_bonnus.c bonus/parssing_bonnus.c bonus/player_bonnus.c bonus/print_bonnus.c\
 			bonus/render_maps_bonnus.c bonus/tmp_file_bonnus.c bonus/utils1_bonnus.c bonus/utils_bonnus.c\
 			bonus/validators_bonnus.c
-SRC	= colors.c cub3d.c distance.c draw.c free.c ft_split.c garbage_collector.c get_next_line.c \
-	  inisial.c init_info.c parssing1.c parssing.c player.c print.c render_maps.c utils1.c utils.c
+SRC	= colors.c cub3d.c distance.c draw.c free.c ft_split.c garbage_collector.c get_next_line.c draw_wall.c \
+	  inisial.c init_info.c parssing1.c parssing.c player.c print.c render_maps.c utils1.c utils.c check.c \
+	  fonction_heelp.c parssing2.c utils2.c render_maps1.c
 
 NAME = cub3d
 NAME_C = cub3d_bonus

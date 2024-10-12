@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmondad <mmondad@student.42.fr>            #+#  +:+       +#+        */
+/*   By: khmessah <khmessah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-08-29 12:15:27 by mmondad           #+#    #+#             */
-/*   Updated: 2024-08-29 12:15:27 by mmondad          ###   ########.fr       */
+/*   Created: 2024/08/29 12:15:27 by mmondad           #+#    #+#             */
+/*   Updated: 2024/10/12 21:13:03 by khmessah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_list(t_info	*info, int i)
+void	free_list(t_info *info, int i)
 {
 	t_garbage	*tmp;
 
@@ -28,15 +28,15 @@ void	free_list(t_info	*info, int i)
 		print_error("Error\n");
 }
 
-void    *ft_malloc(size_t size, t_info *info)
+void	*ft_malloc(size_t size, t_info *info)
 {
-    char *data;
+	char	*data;
 
-    data = malloc(size);
-    if (!data)
-        free_list(info, 1);
-    new_fnode(data, info);
-    return ((void *)data);
+	data = malloc(size);
+	if (!data)
+		free_list(info, 1);
+	new_fnode(data, info);
+	return ((void *)data);
 }
 
 int	ft_exit(void)

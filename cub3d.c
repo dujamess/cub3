@@ -6,7 +6,7 @@
 /*   By: khmessah <khmessah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:46:02 by mmondad           #+#    #+#             */
-/*   Updated: 2024/10/12 18:05:14 by khmessah         ###   ########.fr       */
+/*   Updated: 2024/10/12 21:03:19 by khmessah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	clean_line(t_info *info, char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])
@@ -26,7 +26,7 @@ void	clean_line(t_info *info, char *line)
 		info->width = i;
 }
 
-void    new_maps(t_info *info)
+void	new_maps(t_info *info)
 {
 	int	i;
 
@@ -36,70 +36,23 @@ void    new_maps(t_info *info)
 		clean_line(info, info->maps[i]);
 		info->maps[i] = strdup_new_map(info->maps[i], info);
 		i++;
-	}	
-}
-void	init_texture(t_info *info)
-{
-	info->texture[0].xpm_ptr = mlx_xpm_file_to_image(info->mlx, "./bonus/texture/mur_1.xpm", &info->texture[0].w, &info->texture[0].h);
-	info->texture[0].image = mlx_get_data_addr(info->texture[0].xpm_ptr, &info->texture[0].bet_pxl, &info->texture[0].size_line, &info->texture[0].endn);
-	info->texture[1].xpm_ptr = mlx_xpm_file_to_image(info->mlx, "./bonus/texture/mur_2.xpm", &info->texture[1].w, &info->texture[1].h);
-	info->texture[1].image = mlx_get_data_addr(info->texture[1].xpm_ptr, &info->texture[1].bet_pxl, &info->texture[1].size_line, &info->texture[1].endn);
-	info->texture[2].xpm_ptr = mlx_xpm_file_to_image(info->mlx, "./bonus/texture/ps3.xpm", &info->texture[2].w, &info->texture[2].h);
-	info->texture[2].image = mlx_get_data_addr(info->texture[2].xpm_ptr, &info->texture[2].bet_pxl, &info->texture[2].size_line, &info->texture[2].endn);
-	info->texture[3].xpm_ptr = mlx_xpm_file_to_image(info->mlx, "./bonus/texture/prison_lux1.xpm", &info->texture[3].w, &info->texture[3].h);
-	info->texture[3].image = mlx_get_data_addr(info->texture[3].xpm_ptr, &info->texture[3].bet_pxl, &info->texture[3].size_line, &info->texture[3].endn);
-}
-
-int	check_valide_mur(t_info *info)
-{
-	int i;
-	int j;
-
-	i = 1;
-	while(info->maps[i] && i < info->last_line)
-	{
-		j = 1;
-		while(info->maps[i][j])
-		{
-			if(info->maps[i][j] == '0')
-			{
-				if (!check_valid_caractere(info->maps[i + 1][j]) 
-					|| !check_valid_caractere(info->maps[i - 1][j])
-					|| !check_valid_caractere(info->maps[i][j + 1])
-					|| !check_valid_caractere(info->maps[i][j - 1]))
-						print_error("invalide maps\n");
-			}
-			j++;
-		}
-		i++;
 	}
-	return (1);
 }
 
-int check_element_maps(t_info *info)
+void	ft_hook(t_info *info)
 {
-	int i;
-
-	i = 0;
-	while(info->maps[i])
-	{
-		if(!check_valide_mur(info))
-			return (0);
-		i++;
-	}
-	return (1);
+	init_window(info);
+	init_texture(info);
+	mlx_hook(info->mlx_win, 17, 0, ft_exit, 0);
+	mlx_hook(info->mlx_win, 2, 1L << 0, move_player, info);
+	mlx_loop_hook(info->mlx, rendering_2d, info);
+	mlx_loop(info->mlx);
+	free_list(info, 0);
 }
 
-void	*checker(t_info *info, void	*data)
+int	main(int ac, char **av)
 {
-	if (!data)
-		free_list(info, 1);
-	return (data);
-}
-
-int main(int ac, char **av)
-{
-	t_info info;
+	t_info	info;
 
 	info.mlx = NULL;
 	info.garbage = NULL;
@@ -119,11 +72,5 @@ int main(int ac, char **av)
 		printf("autre caractere\n");
 		return (0);
 	}
-	init_window(&info);
-	init_texture(&info);
-	mlx_hook(info.mlx_win, 17, 0, ft_exit, 0);
-	mlx_hook(info.mlx_win, 2, 1L << 0, move_player, &info);
-	mlx_loop_hook(info.mlx, rendering_2d, &info);
-	mlx_loop(info.mlx);
-	free_list(&info, 0);
+	ft_hook(&info);
 }

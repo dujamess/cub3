@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonnus.c                                     :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khmessah <khmessah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 14:17:34 by khmessah          #+#    #+#             */
-/*   Updated: 2024/10/12 20:14:42 by khmessah         ###   ########.fr       */
+/*   Created: 2024/10/12 21:31:38 by khmessah          #+#    #+#             */
+/*   Updated: 2024/10/12 21:49:01 by khmessah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonnus.h"
+#include "cub3d.h"
 
 int	ft_isdegit(char c)
 {
@@ -107,51 +107,4 @@ int	check_colors(t_info *info)
 		return (1);
 	}
 	return (0);
-}
-
-int	is_map(char *str)
-{
-	while (*str && is_space(*str))
-		str++;
-	if (*str)
-		return (1);
-	return (0);
-}
-
-void	check_textures_path(t_info *info)
-{
-	while (*info->maps)
-	{
-		if (check_colors(info))
-		{
-		}
-		else if (!strcmp_path(*info->maps, "NO", 2))
-		{
-			if (info->path_no)
-				print_error("error_NO");
-			info->path_no = ft_strdup(set_path(*info->maps), info);
-		}
-		else if (!strcmp_path(*info->maps, "WE", 2))
-		{
-			if (info->path_we)
-				print_error("error_we");
-			info->path_we = ft_strdup(set_path(*info->maps), info);
-		}
-		else if (!strcmp_path(*info->maps, "SO", 2))
-		{
-			if (info->path_so)
-				print_error("error_so");
-			info->path_so = ft_strdup(set_path(*info->maps), info);
-		}
-		else if (!strcmp_path(*info->maps, "EA", 2))
-		{
-			if (info->path_ea)
-				print_error("error_ea");
-			info->path_ea = ft_strdup(set_path(*info->maps), info);
-		}
-		else if (is_map(*info->maps))
-			break ;
-		info->size_map--;
-		info->maps++;
-	}
 }

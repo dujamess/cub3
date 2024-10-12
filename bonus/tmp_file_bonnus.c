@@ -1,1 +1,0 @@
-// init_info_bonnus.c

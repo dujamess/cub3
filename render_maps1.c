@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_maps_bonnus.c                               :+:      :+:    :+:   */
+/*   render_maps1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khmessah <khmessah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 13:54:25 by khmessah          #+#    #+#             */
-/*   Updated: 2024/10/12 21:43:39 by khmessah         ###   ########.fr       */
+/*   Created: 2024/10/12 22:03:12 by khmessah          #+#    #+#             */
+/*   Updated: 2024/10/12 22:04:41 by khmessah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonnus.h"
+#include "cub3d.h"
 
 void	put_pixels_as_image(t_info *info, int i, int j, long color)
 {
@@ -62,21 +62,24 @@ void	set_pic(t_info *info)
 	count++;
 }
 
+void	calcul_offset(t_info *info)
+{
+	set_pic(info);
+	info->offset_x = (WIDTH / 2)
+		- (info->images[info->index_y][info->index_x].w / 2) + 100;
+	info->offset_y = HEIGHT - (info->images[info->index_y][info->index_x].h)
+		+ ((info->images[info->index_y][info->index_x].h) / 2) - 60;
+}
+
 void	animation(t_info *info)
 {
 	int	y;
 	int	x;
 	int	var2;
 	int	color;
-	int	offset_x;
-	int	offset_y;
 
-	set_pic(info);
 	y = 0;
-	offset_x = (WIDTH / 2) - (info->images[info->index_y][info->index_x].w / 2)
-		+ 100;
-	offset_y = HEIGHT - (info->images[info->index_y][info->index_x].h)
-		+ ((info->images[info->index_y][info->index_x].h) / 2) - 60;
+	calcul_offset(info);
 	while (y < info->images[info->index_y][info->index_x].h)
 	{
 		x = 0;
@@ -88,55 +91,10 @@ void	animation(t_info *info)
 			color = *(int *)(info->images[info->index_y][info->index_x].image
 					+ var2);
 			if (color != -16777216)
-				my_mlx_pixel_put(info, x + offset_x, y + offset_y, color);
+				my_mlx_pixel_put(info, x + info->offset_x, y
+					+ info->offset_y, color);
 			x++;
 		}
 		y++;
 	}
-}
-
-int	rendering_2d(t_info *info)
-{
-	int	i;
-	int	j;
-
-	info->img = mlx_new_image(info->mlx, WIDTH, HEIGHT);
-	info->save = mlx_get_data_addr(info->img, &info->bits_per_pixel,
-			&info->line_length, &info->endian);
-	if (info->angle < 0)
-		info->angle += 2 * M_PI;
-	if (info->angle > 2 * M_PI)
-		info->angle -= 2 * M_PI;
-	i = 0;
-	while (i <= info->last_line)
-	{
-		j = 0;
-		while (j < info->width)
-		{
-			if (info->maps[i][j] == 'P')
-			{
-				info->x_door = j;
-				info->y_door = i;
-			}
-			if (j < info->width && i <= info->last_line
-				&& is_player(info->maps[i][j]))
-			{
-				if (!info->x_p)
-				{
-					info->y_p = i * TILE_SIZE + 2;
-					info->x_p = j * TILE_SIZE + 2;
-					info->player = info->maps[i][j];
-					init_angle(info);
-				}
-			}
-			j++;
-		}
-		i++;
-	}
-	draw_vector(info);
-	render_minimap(info);
-	animation(info);
-	mlx_put_image_to_window(info->mlx, info->mlx_win, info->img, 0, 0);
-	mlx_destroy_image(info->mlx, info->img);
-	return (0);
 }

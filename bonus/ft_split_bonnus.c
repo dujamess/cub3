@@ -6,7 +6,7 @@
 /*   By: khmessah <khmessah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 14:16:11 by khmessah          #+#    #+#             */
-/*   Updated: 2024/10/12 14:16:14 by khmessah         ###   ########.fr       */
+/*   Updated: 2024/10/12 20:13:23 by khmessah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_locmot(char *str, int *ptr, char sep, t_info *info)
 
 	k = 0;
 	j = ft_sep_mot(str, sep, *ptr);
-	locmot = ft_malloc(sizeof(char) *(j + 1), info);
+	locmot = ft_malloc(sizeof(char) * (j + 1), info);
 	if (!locmot)
 		return (NULL);
 	while (str[*ptr] && str[*ptr] != sep)
